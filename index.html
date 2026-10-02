@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudySphere | Smart Student Study Planner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="topbar">
+  <div>
+    <h1>🌈 StudySphere</h1>
+    <p>Plan Smart • Study Better • Shine Brighter ✨</p>
+  </div>
+
+  <div class="header-actions">
+    <span id="streak">🔥 1 Day Streak</span>
+    <button id="themeBtn">🌙</button>
+  </div>
+</header>
+
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="mascot">🎓🧑‍💻</div>
+
+    <button onclick="showSection('home')">🏠 Home</button>
+    <button onclick="showSection('subjects')">📚 Subjects</button>
+    <button onclick="showSection('timetable')">📅 Timetable</button>
+    <button onclick="showSection('assignments')">📝 Assignments</button>
+    <button onclick="showSection('exams')">🎓 Exams</button>
+    <button onclick="showSection('pomodoro')">⏰ Pomodoro</button>
+    <button onclick="showSection('attendance')">🙋 Attendance</button>
+    <button onclick="showSection('cgpa')">📊 CGPA</button>
+    <button onclick="showSection('goals')">🎯 Goals</button>
+    <button onclick="showSection('progress')">🏆 Progress</button>
+    <button onclick="showSection('recommendations')">🤖 Smart Tips</button>
+  </aside>
+
+  <main class="content">
+
+    <!-- HOME -->
+    <section id="home" class="page active">
+
+      <div class="hero">
+        <div>
+          <span class="badge">✨ LEARNING ADVENTURE</span>
+          <h2>Hello, Future Star! 🌟</h2>
+          <p>
+            Every small study session takes you one step closer
+            to your dreams.
+          </p>
+
+          <button onclick="showSection('pomodoro')" class="primary">
+            🚀 Start Studying
+          </button>
+        </div>
+
+        <div class="hero-character">
+          📚<span>🧑‍🎓</span>💻
+        </div>
+      </div>
+
+      <h2>🌟 My Learning World</h2>
+
+      <div class="dashboard">
+
+        <div class="card purple">
+          <div class="icon">📚</div>
+          <h3>Subjects</h3>
+          <strong id="subjectCount">0</strong>
+          <p>Learning adventures</p>
+        </div>
+
+        <div class="card pink">
+          <div class="icon">📝</div>
+          <h3>Assignments</h3>
+          <strong id="assignmentCount">0</strong>
+          <p>Tasks to conquer</p>
+        </div>
+
+        <div class="card blue">
+          <div class="icon">🎯</div>
+          <h3>Goals</h3>
+          <strong id="goalCount">0</strong>
+          <p>Dreams in progress</p>
+        </div>
+
+        <div class="card orange">
+          <div class="icon">🔥</div>
+          <h3>Study Streak</h3>
+          <strong>1 Day</strong>
+          <p>Keep going!</p>
+        </div>
+
+      </div>
+
+      <div class="quote-box">
+        <span class="quote-character">🦉</span>
+        <div>
+          <h3>💡 Motivation of the Day</h3>
+          <p id="quote"></p>
+          <button onclick="newQuote()">✨ New Quote</button>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- SUBJECTS -->
+    <section id="subjects" class="page">
+      <h2>📚 My Subjects</h2>
+      <p>Add the subjects you want to master.</p>
+
+      <div class="form-card">
+        <input id="subjectInput" placeholder="Example: Mathematics">
+        <button onclick="addSubject()">➕ Add Subject</button>
+      </div>
+
+      <div id="subjectList" class="item-grid"></div>
+    </section>
+
+
+    <!-- TIMETABLE -->
+    <section id="timetable" class="page">
+      <h2>📅 Daily Study Timetable</h2>
+
+      <div class="form-card">
+        <input type="time" id="studyTime">
+        <input id="studySubject" placeholder="Subject">
+        <button onclick="addTimetable()">Add Session</button>
+      </div>
+
+      <div id="timetableList"></div>
+    </section>
+
+
+    <!-- ASSIGNMENTS -->
+    <section id="assignments" class="page">
+      <h2>📝 Assignment Tracker</h2>
+
+      <div class="form-card">
+        <input id="assignmentName" placeholder="Assignment name">
+        <input type="date" id="assignmentDate">
+        <button onclick="addAssignment()">➕ Add Assignment</button>
+      </div>
+
+      <div id="assignmentList"></div>
+    </section>
+
+
+    <!-- EXAMS -->
+    <section id="exams" class="page">
+      <h2>🎓 Exam Countdown</h2>
+
+      <div class="form-card">
+        <input id="examName" placeholder="Exam name">
+        <input type="date" id="examDate">
+        <button onclick="examCountdown()">Calculate</button>
+      </div>
+
+      <div id="examResult" class="result-box"></div>
+    </section>
+
+
+    <!-- POMODORO -->
+    <section id="pomodoro" class="page">
+
+      <h2>⏰ Focus Time</h2>
+
+      <div class="pomodoro-card">
+
+        <div class="anime-face">🧑‍💻✨</div>
+
+        <p>Stay focused! You can do it!</p>
+
+        <div id="timer">25:00</div>
+
+        <div>
+          <button onclick="startTimer()">▶ Start</button>
+          <button onclick="pauseTimer()">⏸ Pause</button>
+          <button onclick="resetTimer()">🔄 Reset</button>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ATTENDANCE -->
+    <section id="attendance" class="page">
+      <h2>🙋 Attendance Calculator</h2>
+
+      <div class="calculator">
+        <input type="number" id="totalClasses"
+               placeholder="Total classes">
+
+        <input type="number" id="attendedClasses"
+               placeholder="Classes attended">
+
+        <button onclick="calculateAttendance()">
+          Calculate Attendance
+        </button>
+
+        <h3 id="attendanceResult"></h3>
+      </div>
+    </section>
+
+
+    <!-- CGPA -->
+    <section id="cgpa" class="page">
+      <h2>📊 SGPA / CGPA Calculator</h2>
+
+      <div class="calculator">
+        <p>Enter semester GPAs separated by commas.</p>
+
+        <input id="gpaValues"
+               placeholder="Example: 8.5, 9.0, 8.7">
+
+        <button onclick="calculateCGPA()">
+          Calculate CGPA
+        </button>
+
+        <h3 id="cgpaResult"></h3>
+      </div>
+    </section>
+
+
+    <!-- GOALS -->
+    <section id="goals" class="page">
+      <h2>🎯 My Study Goals</h2>
+
+      <div class="form-card">
+        <input id="goalInput"
+               placeholder="Example: Finish Python Chapter 5">
+
+        <button onclick="addGoal()">🌟 Add Goal</button>
+      </div>
+
+      <div id="goalList"></div>
+    </section>
+
+
+    <!-- PROGRESS -->
+    <section id="progress" class="page">
+
+      <h2>🏆 Syllabus Progress</h2>
+
+      <div class="progress-card">
+        <h3>🐍 Python</h3>
+        <div class="progress-bar">
+          <div style="width:75%">75%</div>
+        </div>
+      </div>
+
+      <div class="progress-card">
+        <h3>➗ Mathematics</h3>
+        <div class="progress-bar">
+          <div style="width:60%">60%</div>
+        </div>
+      </div>
+
+      <div class="progress-card">
+        <h3>⚡ Physics</h3>
+        <div class="progress-bar">
+          <div style="width:85%">85%</div>
+        </div>
+      </div>
+
+      <h2>📈 Performance</h2>
+
+      <div class="chart">
+        <div style="height:70%"><span>Mon</span></div>
+        <div style="height:90%"><span>Tue</span></div>
+        <div style="height:55%"><span>Wed</span></div>
+        <div style="height:80%"><span>Thu</span></div>
+        <div style="height:95%"><span>Fri</span></div>
+      </div>
+
+    </section>
+
+
+    <!-- SMART RECOMMENDATIONS -->
+    <section id="recommendations" class="page">
+
+      <h2>🤖 Smart Study Buddy</h2>
+
+      <div class="robot">
+        🤖
+      </div>
+
+      <div class="recommendation">
+        📚 Spend 30 minutes revising your weakest subject today.
+      </div>
+
+      <div class="recommendation">
+        ⏰ Try two Pomodoro sessions before taking a long break.
+      </div>
+
+      <div class="recommendation">
+        📝 Complete assignments before their final deadline.
+      </div>
+
+      <div class="recommendation">
+        🌙 Avoid studying too late. Good sleep improves learning.
+      </div>
+
+      <div class="recommendation">
+        🏆 Complete one small goal today to maintain your streak!
+      </div>
+
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  🌈 StudySphere • Learn • Grow • Achieve 🚀
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
